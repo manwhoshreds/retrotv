@@ -1,0 +1,45 @@
+ChannelTransitionOverlay {
+    background: transparent;
+}
+
+QFrame#transitionPanel {
+    background: rgba(0, 0, 0, 218);
+    border: 1px solid rgba(255, 255, 255, 38);
+    border-radius: 6px;
+}
+
+QLabel#transitionEyebrow {
+    color: rgba(255, 255, 255, 170);
+    font-size: 12px;
+    font-weight: 900;
+}
+
+QLabel#transitionNumber {
+    color: #ffffff;
+    font-size: 42px;
+    font-weight: 900;
+}
+
+QFrame#transitionRule {
+    background: rgba(255, 255, 255, 210);
+    border: none;
+    min-width: 1px;
+    max-width: 1px;
+}
+
+QLabel#transitionChannel {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+QLabel#transitionTitle {
+    color: rgba(255, 255, 255, 225);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+QLabel#transitionTime {
+    color: rgba(255, 255, 255, 210);
+    font-size: 13px;
+}

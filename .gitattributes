@@ -1,0 +1,12 @@
+# Keep source and configuration files stable across development platforms.
+* text=auto eol=lf
+
+# Binary assets should never be line-ending normalized or rendered as text diffs.
+*.gif binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.mp4 binary
+*.ods binary
+*.png binary
+*.webp binary

@@ -1,0 +1,6 @@
+{
+    "outputs": [
+        { "name": "HDMI1", "mode": "1920x1080" },
+        { "name": "HDMI2", "mode": "1920x1080" }
+    ]
+}

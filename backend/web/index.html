@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RetroTV Backend</title>
+    <link rel="stylesheet" href="/styles/base.css?v=20260725-page-icons" />
+    <link rel="stylesheet" href="/styles/library-common.css?v=20260718" />
+    <link rel="stylesheet" href="/styles/settings.css?v=20260718" />
+    <link rel="stylesheet" href="/styles/media-library.css?v=20260718" />
+    <link rel="stylesheet" href="/styles/channels.css?v=20260718" />
+    <link rel="stylesheet" href="/styles/programming.css?v=20260718" />
+    <link rel="stylesheet" href="/styles/media-details.css?v=20260718" />
+    <link rel="stylesheet" href="/styles/responsive.css?v=20260718" />
+    <link rel="stylesheet" href="/styles/library-layout.css?v=20260725-movie-header-gap" />
+    <link rel="stylesheet" href="/styles/guide.css?v=20260718" />
+    <link rel="stylesheet" href="/styles/collections.css?v=20260725-page-icons" />
+    <link rel="stylesheet" href="/styles/dashboard.css?v=20260719" />
+    <link rel="stylesheet" href="/styles/navigation.css?v=20260719" />
+    <link rel="stylesheet" href="/styles/programming-page.css?v=20260720-clean-toolbar" />
+    <link rel="stylesheet" href="/styles/page-headers.css?v=20260725-unified" />
+  </head>
+  <body>
+    <div class="app-shell library-shell">
+      <aside class="sidebar library-sidebar" aria-label="Primary navigation">
+        <a class="brand sidebar-brand" href="#" data-view="dashboard">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3 12 7 17 3" /><rect x="3" y="7" width="18" height="13" rx="3" /><path d="M17 11h.01" /></svg></span>
+          <span>Retro<strong>TV</strong></span>
+        </a>
+        <nav class="nav-stack">
+          <div class="nav-group">
+            <a class="nav-item" href="#" data-view="dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 8h4v4H7zM14 8h3M14 12h3M7 16h10" /></svg><span>Dashboard</span></a>
+          </div>
+          <div class="nav-group">
+            <p class="nav-section-label">Library</p>
+            <a class="nav-item" href="#" data-view="movies">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9 4v16M15 4v16M4 9h5M15 9h5M4 15h5M15 15h5" /></svg>
+              <span>Movies</span>
+            </a>
+            <a class="nav-item" href="#" data-view="tv">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="13" rx="2" /><path d="M8 21h8M12 18v3" /></svg>
+              <span>TV Shows</span>
+            </a>
+            <span class="nav-item nav-item-planned" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l10-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="16" cy="16" r="3" /></svg><span>Music</span><small>Soon</small></span>
+            <a class="nav-item" href="#" data-view="collections">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+              <span>Collections</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <p class="nav-section-label">Manage</p>
+            <a class="nav-item" href="#" data-view="channels"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /><circle cx="7" cy="7" r="1" /><circle cx="13" cy="12" r="1" /><circle cx="17" cy="17" r="1" /></svg><span>Channels</span></a>
+            <a class="nav-item" href="#" data-view="programming"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></svg><span>Programming</span></a>
+            <a class="nav-item" href="#" data-view="guide"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="2" /><path d="M8 3v4M16 3v4M3 10h18" /></svg><span>Guide</span></a>
+            <a class="nav-item" href="#" data-view="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.4 1a7 7 0 0 0-1.7-1L14.5 3h-5l-.4 3.1a7 7 0 0 0-1.7 1l-2.4-1-2 3.4L5 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.4 3.1h5l.4-3.1a7 7 0 0 0 1.7-1l2.4 1 2-3.4L19 13a7 7 0 0 0 0-1Z" /></svg><span>Settings</span></a>
+          </div>
+        </nav>
+
+      </aside>
+
+      <main class="content">
+        <section class="page dashboard-view" id="dashboard-view">
+          <header class="page-header dashboard-heading">
+            <div><h1 class="page-heading-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 8h4v4H7zM14 8h3M14 12h3M7 16h10" /></svg><span>Dashboard</span></h1><p>Overview of your RetroTV server</p></div>
+            <time id="dashboard-clock"></time>
+          </header>
+
+          <section class="dashboard-metrics" aria-label="Library totals">
+            <button class="dashboard-metric metric-channels" type="button" data-view-target="channels"><span class="metric-icon">▣</span><div><small>Total Channels</small><strong id="dashboard-channel-count">0</strong><span>channels</span><em>Manage →</em></div></button>
+            <button class="dashboard-metric metric-movies" type="button" data-view-target="movies"><span class="metric-icon">▤</span><div><small>Total Movies</small><strong id="dashboard-movie-count">0</strong><span>movies</span><em>Browse →</em></div></button>
+            <button class="dashboard-metric metric-shows" type="button" data-view-target="tv"><span class="metric-icon">▥</span><div><small>Total TV Shows</small><strong id="dashboard-show-count">0</strong><span><b id="dashboard-episode-count">0</b> episodes</span><em>Browse →</em></div></button>
+            <button class="dashboard-metric metric-storage" type="button" data-view-target="settings"><span class="metric-icon">▱</span><div><small>Storage Used</small><strong id="dashboard-storage-used">—</strong><span id="dashboard-storage-total">Calculating…</span><em>View Storage →</em></div></button>
+          </section>
+
+          <section class="dashboard-primary-grid">
+            <article class="dashboard-card dashboard-now-playing">
+              <header><h2>Now Playing</h2><button type="button" data-view-target="movies">Browse Movies →</button></header>
+              <div id="dashboard-random-movies" class="dashboard-movie-list"></div>
+            </article>
+            <article class="dashboard-card dashboard-specials">
+              <header><h2>Upcoming Specials</h2><button type="button" data-view-target="channels">Manage →</button></header>
+              <div id="dashboard-special-list" class="dashboard-special-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="page active" id="movies-view">
+          <header class="page-header topbar movie-page-heading">
+            <div>
+              <h1 class="page-heading-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9 4v16M15 4v16M4 9h5M15 9h5M4 15h5M15 15h5" /></svg><span>Movies</span></h1>
+              <p><span id="movie-count">0</span> movies</p>
+            </div>
+          </header>
+
+          <section class="workspace">
+            <section class="library-pane" aria-label="Movie library">
+            <div class="library-toolbar movie-management-toolbar">
+              <label class="search-box movie-search-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                <input id="search" type="search" placeholder="Search movies..." autocomplete="off" />
+              </label>
+              <div class="toolbar-left movie-toolbar-actions">
+                <button class="button ghost compact" id="scan-button" type="button">Scan Library</button>
+                <button class="button ghost compact" id="refresh-selected-metadata" type="button">Refresh Metadata</button>
+                <select class="toolbar-select" id="movie-sort" aria-label="Sort movies"><option value="title-asc">Sort by: Title A-Z</option><option value="title-desc">Sort by: Title Z-A</option><option value="year-desc">Sort by: Newest</option><option value="year-asc">Sort by: Oldest</option><option value="added-desc">Sort by: Recently Added</option></select>
+              </div>
+            </div>
+
+            <p class="library-status" id="scan-status">Movie sources are managed in Settings.</p>
+
+            <div class="movie-grid" id="movie-grid" aria-live="polite"></div>
+            <nav class="pagination" id="movie-pagination" aria-label="Movie pages"></nav>
+            </section>
+
+            <aside class="details-panel" id="details-panel" aria-label="Movie details"></aside>
+          </section>
+        </section>
+
+        <section class="page collections-view" id="collections-view">
+          <header class="page-header collections-header">
+            <div>
+              <h1 class="page-heading-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg><span>Collections</span></h1>
+              <p><span id="collection-count">0</span> collections</p>
+            </div>
+            <button class="button primary" id="create-collection-button" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+              Create Collection
+            </button>
+          </header>
+          <section class="collections-workspace" aria-label="Collections library">
+            <div class="collections-results">
+              <div class="collections-toolbar">
+                <label class="search-box collections-search-box">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                  <input id="collection-search" type="search" placeholder="Search collections..." autocomplete="off" disabled />
+                </label>
+                <select class="toolbar-select" id="collection-sort" aria-label="Sort collections" disabled>
+                  <option>Sort by: Name A-Z</option>
+                </select>
+              </div>
+              <div class="collection-grid" id="collection-grid"></div>
+              <section class="collections-empty-state" id="collections-empty-state">
+                <span class="collections-empty-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+                </span>
+                <h2>No collections yet</h2>
+                <p>Create your first collection when you are ready to organize movies into custom groups.</p>
+                <button class="button primary" id="create-first-collection-button" type="button">Create Collection</button>
+              </section>
+            </div>
+            <aside class="collection-inspector" id="collection-inspector" aria-label="Collection details"></aside>
+          </section>
+          <section class="collection-editor" id="collection-editor" hidden>
+            <header class="collection-editor-header">
+              <div>
+                <button class="collection-back-button" id="collection-back-button" type="button">← Back to Collections</button>
+                <h1 id="collection-editor-title">Create Collection</h1>
+              </div>
+              <div class="collection-editor-actions">
+                <button class="button ghost" id="cancel-collection-button" type="button">Cancel</button>
+                <button class="button primary" id="save-collection-button" type="button">Save Collection</button>
+              </div>
+            </header>
+
+            <div class="collection-editor-main">
+            <section class="collection-editor-card collection-basics-card">
+              <div class="collection-artwork-field">
+                <div class="collection-artwork-preview" id="collection-artwork-preview">
+                  <div class="collection-artwork-half" data-artwork-half="0"></div>
+                  <div class="collection-artwork-half" data-artwork-half="1"></div>
+                  <span>Artwork appears when two matched or pinned posters are available.</span>
+                  <strong class="collection-auto-art-title" aria-hidden="true"></strong>
+                  <div class="collection-artwork-actions"><button class="button ghost compact" id="choose-collection-artwork" type="button">Edit Artwork</button><button class="button ghost compact" id="shuffle-collection-artwork" type="button">Shuffle</button><button class="button ghost compact" id="remove-collection-artwork" type="button">Use Auto</button></div>
+                </div>
+                <input id="collection-artwork-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+              </div>
+              <div class="collection-fields">
+                <label>Name <span aria-hidden="true">*</span><input id="collection-name" type="text" maxlength="120" placeholder="Collection name" /></label>
+                <label>Description<textarea id="collection-description" maxlength="500" rows="4" placeholder="Describe this collection"></textarea></label>
+              </div>
+            </section>
+
+            <section class="collection-editor-card">
+              <div class="collection-card-heading">
+                <div><h2>Rules Engine</h2><p>Use the same metadata rules available in the Channel Builder.</p></div>
+                <button class="button ghost compact" id="add-collection-rule" type="button">+ Add Rule</button>
+              </div>
+              <div class="collection-rules" id="collection-rules"></div>
+              <p class="collection-match-summary" id="collection-match-summary">No rules configured. Add rules or pin media below.</p>
+            </section>
+
+            <section class="collection-editor-card">
+              <div class="collection-card-heading">
+                <div><h2>Pinned Media</h2><p>Pinned items are always included, regardless of rules.</p></div>
+              </div>
+              <label class="search-box collection-media-search">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                <input id="collection-media-search" type="search" placeholder="Search movies and TV shows..." autocomplete="off" />
+              </label>
+              <div class="collection-media-results" id="collection-media-results"></div>
+              <div class="collection-pinned-media" id="collection-pinned-media"></div>
+            </section>
+            <p class="collection-save-status" id="collection-save-status" role="status"></p>
+            </div>
+            <aside class="collection-preview-panel" aria-label="Matching collection media">
+              <header><div><h2>Matching Media</h2><p id="collection-preview-count">0 included</p></div></header>
+              <label class="search-box collection-preview-search">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                <input id="collection-preview-search" type="search" placeholder="Search matching media..." autocomplete="off" />
+              </label>
+              <label class="collection-preview-excluded-toggle"><input id="collection-preview-show-excluded" type="checkbox" /> Show excluded</label>
+              <div class="collection-preview-list" id="collection-preview-list"></div>
+            </aside>
+          </section>
+        </section>
+
+        <section class="page" id="tv-view">
+          <header class="page-header topbar">
+            <div>
+              <h1 class="page-heading-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="13" rx="2" /><path d="M8 21h8M12 18v3" /></svg><span>TV Shows</span></h1>
+              <p><span id="tv-count">0</span> TV Shows</p>
+            </div>
+            <div class="top-actions">
+              <label class="search-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                <input id="tv-search" type="search" placeholder="Search TV shows..." autocomplete="off" />
+              </label>
+            </div>
+          </header>
+
+          <section class="tv-workspace">
+            <section class="library-pane" aria-label="TV show library">
+              <div class="media-path-row">
+                <button class="button ghost compact" id="scan-tv-button" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8" /><path d="M21 4v6h-6M3 20v-6h6" /></svg>
+                  Scan TV Shows
+                </button>
+                <p id="tv-scan-status">TV sources are managed in Settings.</p>
+              </div>
+              <div class="tv-grid" id="tv-grid" aria-live="polite"></div>
+              <nav class="pagination" id="tv-pagination" aria-label="TV show pages"></nav>
+            </section>
+
+            <aside class="show-details-panel" id="tv-details-panel" aria-label="TV show details"></aside>
+            <section class="tv-show-full-detail" id="tv-show-full-detail" aria-label="TV show episode details" hidden></section>
+          </section>
+        </section>
+
+        <section class="page guide-view" id="guide-view">
+          <header class="page-header guide-header">
+            <div>
+              <h1 class="page-heading-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2" /><path d="M8 3v4M16 3v4M3 10h18" /></svg><span>TV Guide</span></h1>
+              <p>Scheduled programming across all airing channels</p>
+            </div>
+            <div class="guide-date-controls" aria-label="Guide date controls">
+              <label><span class="sr-only">Guide date</span><input id="guide-date" type="date" /></label>
+              <button class="button ghost compact" id="guide-today" type="button">Today</button>
+              <button class="button ghost compact guide-step" id="guide-previous-day" type="button" aria-label="Previous day">‹</button>
+              <button class="button ghost compact guide-step" id="guide-next-day" type="button" aria-label="Next day">›</button>
+              <button class="button ghost compact" id="guide-now" type="button">Now</button>
+            </div>
+          </header>
+          <p class="guide-status" id="guide-status" role="status">Loading guide…</p>
+          <section class="guide-workspace">
+            <div class="guide-schedule-shell">
+              <div class="guide-time-header" id="guide-time-header"></div>
+              <div class="guide-schedule" id="guide-schedule" aria-live="polite"></div>
+            </div>
+            <aside class="guide-inspector" id="guide-inspector" aria-label="Program details"></aside>
+          </section>
+        </section>
+
+        <section class="page" id="channels-view">
+          <header class="page-header topbar channels-header">
+            <div>
+              <h1 class="page-heading-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /><circle cx="7" cy="7" r="1" /><circle cx="13" cy="12" r="1" /><circle cx="17" cy="17" r="1" /></svg><span>Channels</span></h1>
+              <p>Manage your custom channels</p>
+            </div>
+            <div class="top-actions">
+              <button class="button ghost compact" id="export-channels-button" type="button" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9M8 13l4-4 4 4" /><path d="M4 3h16" /></svg>
+                Export RTV
+              </button>
+              <button class="button ghost compact" id="import-channels-button" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M8 11l4 4 4-4" /><path d="M4 21h16" /></svg>
+                Import RTV
+              </button>
+              <input id="import-channels-file" type="file" accept=".rtv,application/zip" hidden />
+              <button class="button primary" id="create-channel-button" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                Create Channel
+              </button>
+            </div>
+          </header>
+
+          <section class="channels-page">
+            <div class="channels-card">
+              <div class="channel-list" id="channel-rows" aria-label="Channels"></div>
+
+              <footer class="channels-footer">
+                <span id="channel-count">No channels created</span>
+                <span class="channel-import-progress" id="channel-import-progress" hidden>
+                  <span class="spinner" aria-hidden="true"></span>
+                  <span id="channel-import-progress-text">Generating schedules...</span>
+                </span>
+              </footer>
+            </div>
+          </section>
+        </section>
+
+        <section class="page programming-page-view" id="programming-view">
+          <header class="page-header programming-page-header">
+            <div><h1 class="page-heading-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></svg><span>Programming</span></h1><p>Build and manage your channel schedules</p></div>
+          </header>
+          <section class="programming-page-toolbar">
+            <label>Channel <select id="programming-channel-select"></select></label>
+            <button class="button ghost" id="programming-manage-channel" type="button">Manage Channel</button>
+            <div class="programming-week-navigator">
+              <button class="icon-button" id="programming-previous-week" type="button" aria-label="Previous week">‹</button>
+              <button id="programming-week-label" type="button" aria-haspopup="dialog" aria-expanded="false"></button>
+              <button class="icon-button" id="programming-next-week" type="button" aria-label="Next week">›</button>
+              <section class="programming-week-picker" id="programming-week-picker" role="dialog" aria-label="Choose a week" hidden>
+                <header><button class="icon-button" id="programming-previous-month" type="button" aria-label="Previous month">‹</button><strong id="programming-picker-month"></strong><button class="icon-button" id="programming-next-month" type="button" aria-label="Next month">›</button></header>
+                <div class="programming-picker-weekdays" aria-hidden="true"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+                <div class="programming-picker-weeks" id="programming-picker-weeks"></div>
+                <footer><button class="button ghost compact" id="programming-picker-today" type="button">This week</button></footer>
+              </section>
+            </div>
+            <button class="button primary programming-publish" id="programming-publish" type="button">Publish Changes</button>
+          </section>
+          <section class="programming-page-workspace">
+            <section class="programming-calendar-panel">
+              <section class="programming-all-day-section">
+                <div id="programming-all-day-lane" class="programming-all-day-lane"></div>
+              </section>
+              <div id="programming-calendar" class="programming-calendar"></div>
+              <div class="programming-calendar-legend"><span class="legend-movie">Movies</span><span class="legend-tv">TV Shows</span><span class="legend-mixed">Mixed Content</span></div>
+              <p>Drag collections onto the timeline to schedule them. Select blocks to edit their placement.</p>
+            </section>
+            <aside class="programming-collections-panel">
+              <h2>Schedule Sources</h2>
+              <div class="programming-source-tabs" role="tablist" aria-label="Schedule source type">
+                <button class="active" type="button" role="tab" aria-selected="true" data-programming-source="collections">Collections</button>
+                <button type="button" role="tab" aria-selected="false" data-programming-source="movies">Movies</button>
+                <button type="button" role="tab" aria-selected="false" data-programming-source="tvshows">TV Shows</button>
+              </div>
+              <input id="programming-collection-search" type="search" placeholder="Search collections..." />
+              <select id="programming-collection-type"><option value="">All Types</option><option value="movie">Movies</option><option value="tv">TV Shows</option></select>
+              <div id="programming-collection-list" class="programming-collection-list"></div>
+              <button class="button ghost" id="programming-new-collection" type="button">＋ New Collection</button>
+            </aside>
+          </section>
+        </section>
+
+        <section class="page" id="settings-view">
+          <header class="page-header topbar">
+            <div>
+              <h1 class="page-heading-title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.4 1a7 7 0 0 0-1.7-1L14.5 3h-5l-.4 3.1a7 7 0 0 0-1.7 1l-2.4-1-2 3.4L5 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.4 3.1h5l.4-3.1a7 7 0 0 0 1.7-1l2.4 1 2-3.4L19 13a7 7 0 0 0 0-1Z" /></svg><span>Settings</span></h1>
+              <p>Manage movie and TV media sources</p>
+            </div>
+            <div class="top-actions">
+              <p class="settings-save-feedback" id="settings-status" role="status" aria-live="polite">All changes saved</p>
+              <button class="button ghost compact" id="scan-all-sources-button" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8" /><path d="M21 4v6h-6M3 20v-6h6" /></svg>
+                Scan All Sources
+              </button>
+              <button class="button primary settings-save-button" id="save-settings-button" type="button" disabled>
+                <span class="spinner settings-save-spinner" aria-hidden="true" hidden></span>
+                <span id="save-settings-label">Save</span>
+              </button>
+            </div>
+          </header>
+
+          <section class="settings-page">
+            <section class="settings-card">
+              <div class="settings-card-head">
+                <div>
+                  <h2>Media Sources</h2>
+                  <p>Add folders and choose whether each folder contains movies or TV shows.</p>
+                </div>
+                <button class="button ghost compact" id="add-source-button" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                  Add Source
+                </button>
+              </div>
+              <div class="source-list" id="source-list"></div>
+            </section>
+            <section class="settings-card">
+              <div class="settings-card-head">
+                <div>
+                  <h2>Scan Behavior</h2>
+                  <p>Normal scans reuse metadata when a file's size and modification time have not changed.</p>
+                </div>
+              </div>
+              <label class="scan-option">
+                <input id="force-metadata-scan" type="checkbox" />
+                <span>
+                  <strong>Hard refresh metadata</strong>
+                  <small>Re-run ffprobe, TMDB lookups, and artwork processing during scans. Leave this off for fast scans.</small>
+                </span>
+              </label>
+            </section>
+            <section class="settings-card">
+              <div class="settings-card-head">
+                <div>
+                  <h2>Channel Assets</h2>
+                  <p>Folders for bumpers, commercials, promos, and station IDs.</p>
+                </div>
+                <button class="button ghost compact" id="add-asset-source-button" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                  Add Source
+                </button>
+                <button class="button primary compact" id="scan-assets-button" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36" /><path d="M21 3v6h-6" /></svg>
+                  Scan Assets
+                </button>
+              </div>
+              <div class="source-list" id="asset-source-list"></div>
+              <div class="asset-summary" id="asset-summary"></div>
+            </section>
+            <section class="settings-card">
+              <div class="settings-card-head">
+                <div>
+                  <h2>Streaming</h2>
+                  <p>Choose the playback URL style returned to clients.</p>
+                </div>
+              </div>
+              <fieldset class="streaming-mode-control" id="streaming-mode-control" aria-label="Streaming mode">
+                <label>
+                  <input type="radio" name="streaming-mode" value="direct" />
+                  <span>
+                    <strong>Direct File</strong>
+                    <small>Serve media files from /media with client-side seeking.</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="streaming-mode" value="hls" />
+                  <span>
+                    <strong>HLS (Experimental)</strong>
+                    <small>Return live channel playlists generated by FFmpeg.</small>
+                  </span>
+                </label>
+              </fieldset>
+            </section>
+          </section>
+        </section>
+
+        <section class="page" id="channel-builder-view">
+          <header class="topbar builder-header">
+            <div>
+              <h1>Channel Builder</h1>
+              <p>Create and configure your custom channel</p>
+            </div>
+            <div class="top-actions">
+              <p class="channel-save-status" id="channel-save-status"></p>
+              <button class="button primary" id="save-channel-button" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" /><path d="M17 21v-8H7v8M7 3v5h8" /></svg>
+                Save Channel
+              </button>
+            </div>
+          </header>
+
+          <section class="builder-page">
+            <div class="builder-main">
+              <section class="builder-card basic-card channel-details-card">
+                <h2>Channel Details</h2>
+                <div class="basic-grid">
+                  <div class="logo-column">
+                    <div class="builder-logo-wrap">
+                      <div class="builder-logo channel-logo hot" id="builder-logo-preview">TV</div>
+                      <button class="icon-button logo-edit-button" id="channel-logo-edit-button" type="button" aria-label="Choose channel logo">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 20 8-8-4-4-8 8-2 6 6-2Z" /><path d="m14 6 4 4" /></svg>
+                      </button>
+                    </div>
+                    <input id="channel-logo-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+                    <input id="channel-logo-path" type="hidden" />
+                  </div>
+
+                  <div class="form-grid">
+                    <label class="channel-name-field">
+                      <span>Channel Name</span>
+                      <input id="channel-name" type="text" placeholder="80s Action" />
+                    </label>
+                    <label class="channel-description-field">
+                      <span>Description</span>
+                      <textarea id="channel-description" placeholder="Classic kids shows and family favorites from the 80s, 90s, and early 2000s."></textarea>
+                    </label>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="programming-recurrence-modal" aria-hidden="true" hidden>
+      <section class="programming-recurrence-modal" role="dialog" aria-modal="true" aria-labelledby="programming-recurrence-title">
+        <header><h2 id="programming-recurrence-title">Update recurring time block?</h2><button class="icon-button" id="programming-recurrence-close" type="button" aria-label="Cancel adjustment">×</button></header>
+        <div><p>This time block repeats weekly. Which occurrences should this change affect?</p><button type="button" data-recurrence-scope="one"><strong>Just this occurrence</strong><small>Only change this date. The weekly schedule stays the same.</small></button><button type="button" data-recurrence-scope="all"><strong>All occurrences</strong><small>Update the entire recurring time block.</small></button></div>
+        <footer><button class="button ghost" id="programming-recurrence-cancel" type="button">Cancel</button></footer>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="programming-drop-modal" aria-hidden="true" hidden>
+      <section class="programming-drop-modal" role="dialog" aria-modal="true" aria-labelledby="programming-drop-title">
+        <header class="programming-drop-head">
+          <div><p class="programming-drop-eyebrow">Schedule programming</p><h2 id="programming-drop-title">Add to timeline</h2><p id="programming-drop-source"></p></div>
+          <button class="icon-button" id="programming-drop-close" type="button" aria-label="Close scheduling dialog">×</button>
+        </header>
+        <div class="programming-drop-form">
+          <fieldset class="programming-schedule-modes">
+            <legend>Schedule</legend>
+            <label><input type="radio" name="programming-schedule-mode" value="weekly" checked /><span><strong>Time block</strong><small>Repeats every week on selected days</small></span></label>
+            <label><input type="radio" name="programming-schedule-mode" value="once" /><span><strong>Special event</strong><small>A one-time feature or marathon</small></span></label>
+          </fieldset>
+          <div class="programming-drop-weekly" id="programming-drop-weekly"><span>Repeats on</span><div class="programming-drop-days" id="programming-drop-days">
+            <button type="button" data-drop-day="mon">M</button><button type="button" data-drop-day="tue">T</button><button type="button" data-drop-day="wed">W</button><button type="button" data-drop-day="thu">T</button><button type="button" data-drop-day="fri">F</button><button type="button" data-drop-day="sat">S</button><button type="button" data-drop-day="sun">S</button>
+          </div></div>
+          <label class="programming-drop-field" id="programming-drop-date-field" hidden><span>Event date</span><input id="programming-drop-date" type="date" /></label>
+          <div class="programming-drop-times"><label class="programming-drop-field"><span>Starts</span><input id="programming-drop-start" type="time" step="1800" /></label><label class="programming-drop-field"><span>Ends</span><input id="programming-drop-end" type="time" step="1800" /></label></div>
+          <aside class="programming-schedule-notice" id="programming-schedule-notice" hidden><span aria-hidden="true">i</span><p><strong>This time already contains scheduled programming.</strong><small>Publishing will replace programming only within this block’s affected time. Everything outside it will remain unchanged.</small></p></aside>
+          <label class="programming-drop-field" id="programming-drop-playback-field"><span>Playback order</span><select id="programming-drop-playback"><option value="shuffle">Rotate from the pool</option><option value="in_order">Play in order</option><option value="chronological">Chronological / continue progress</option></select><small>For a marathon, simply make this a longer block. Chronological playback remembers the next episode.</small></label>
+          <p class="programming-drop-error" id="programming-drop-error" role="alert"></p>
+        </div>
+        <footer class="programming-drop-actions"><button class="button ghost" id="programming-drop-cancel" type="button">Cancel</button><button class="button primary" id="programming-drop-confirm" type="button">Add to schedule</button></footer>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="delete-rule-modal" aria-hidden="true" hidden>
+      <section class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="delete-rule-title">
+        <div class="confirm-modal-head">
+          <h2 id="delete-rule-title">Delete Rule</h2>
+          <button class="icon-button" id="cancel-delete-rule-x" type="button" aria-label="Close modal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </div>
+        <p>This rule will be removed from the channel builder.</p>
+        <div class="confirm-modal-actions">
+          <button class="button ghost compact" id="cancel-delete-rule" type="button">Cancel</button>
+          <button class="button danger compact" id="confirm-delete-rule" type="button">Delete Rule</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="delete-channel-modal" aria-hidden="true" hidden>
+      <section class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="delete-channel-title" aria-describedby="delete-channel-message">
+        <div class="confirm-modal-head">
+          <h2 id="delete-channel-title">Delete Channel</h2>
+          <button class="icon-button" id="cancel-delete-channel-x" type="button" aria-label="Close modal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </div>
+        <p id="delete-channel-message">This channel and its generated schedule will be permanently deleted.</p>
+        <div class="confirm-modal-actions">
+          <button class="button ghost compact" id="cancel-delete-channel" type="button">Cancel</button>
+          <button class="button danger compact" id="confirm-delete-channel" type="button">Delete Channel</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="scan-error-modal" aria-hidden="true" hidden>
+      <section class="scan-error-modal" role="dialog" aria-modal="true" aria-labelledby="scan-error-title">
+        <div class="scan-error-modal-head">
+          <div>
+            <h2 id="scan-error-title">Scan issues</h2>
+            <p id="scan-error-summary">Issues need attention.</p>
+          </div>
+          <button class="icon-button" id="scan-error-close" type="button" aria-label="Close scan issues">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </div>
+        <div class="scan-error-list" id="scan-error-list"></div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop metadata-match-backdrop" id="metadata-match-modal" aria-hidden="true" hidden>
+      <section class="metadata-match-modal" role="dialog" aria-modal="true" aria-labelledby="metadata-match-title" aria-describedby="metadata-match-summary">
+        <header class="metadata-match-head">
+          <div>
+            <h2 id="metadata-match-title">Search for a Match</h2>
+            <p id="metadata-match-summary"></p>
+          </div>
+          <button class="icon-button" id="metadata-match-close" type="button" aria-label="Close metadata search results">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </header>
+        <form class="metadata-match-search" id="metadata-match-search">
+          <label for="metadata-match-query">Search TMDB</label>
+          <div>
+            <span aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            </span>
+            <input id="metadata-match-query" type="search" autocomplete="off" />
+            <button class="button primary" id="metadata-match-search-button" type="submit">Search</button>
+          </div>
+        </form>
+        <div class="metadata-match-list" id="metadata-match-list"></div>
+        <footer class="metadata-match-footer">
+          <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
+            Results from TMDB
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8" /><path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" /></svg>
+          </a>
+          <button class="button ghost compact" id="metadata-match-cancel" type="button">Cancel</button>
+        </footer>
+      </section>
+    </div>
+
+    <section class="scan-progress-bar" id="scan-progress-bar" aria-live="polite" hidden>
+      <div>
+        <strong id="scan-progress-phase">Scanning</strong>
+        <span id="scan-progress-current">Preparing scan...</span>
+      </div>
+      <div class="scan-progress-meta">
+        <span id="scan-progress-count"></span>
+        <span id="scan-progress-errors"></span>
+      </div>
+    </section>
+
+    <script src="/app.js?v=20260720-clean-toolbar"></script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+# ====================
+# Go
+# ====================
+
+# Binaries
+backend/retrotv-server
+backend/main
+client/build-current/
+/retrotv-server
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Coverage reports
+*.out
+coverage.out
+*.coverprofile
+
+# Profiling output
+*.prof
+
+# Go workspace
+go.work.sum
+
+# Scratch
+scratch/
+
+
+# ====================
+# Node / Vite
+# ====================
+
+node_modules/
+dist/
+build/
+.npm/
+.vite/
+
+
+# ====================
+# Environment
+# ====================
+
+.env
+.env.*
+!.env.example
+.envrc
+
+
+# ====================
+# IDEs
+# ====================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+
+# ====================
+# CMake / Qt
+# ====================
+
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+Testing/
+cmake-build-*/
+*_autogen/
+.qt/
+.qmake.stash
+*.pro.user*
+
+
+# ====================
+# OS files
+# ====================
+
+.DS_Store
+Thumbs.db
+
+
+# ====================
+# Logs
+# ====================
+
+*.log
+logs/
+
+
+# ====================
+# Generated RetroTV files
+# ====================
+
+guide.xml
+*.m3u
+channels/generated/
+cache/
+tmp/
+
+
+# ====================
+# User media
+# ====================
+
+media/
+movies/
+tvshows/
+music/
+music_videos/
+nfs/
+client/testdata/*.avi
+client/testdata/*.m4v
+client/testdata/*.mkv
+client/testdata/*.mov
+client/testdata/*.mp4
+client/testdata/*.ts
+client/testdata/*.webm
+
+
+# ====================
+# User data
+# ====================
+
+data/
+uploads/
+thumbnails/
+artwork/

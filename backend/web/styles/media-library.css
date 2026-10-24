@@ -1,0 +1,647 @@
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 26px 24px;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  min-height: 240px;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  padding: 36px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 8px;
+  background: rgba(9, 14, 21, 0.52);
+  text-align: center;
+}
+
+.empty-state h2,
+.details-empty h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: 0;
+}
+
+.empty-state p,
+.details-empty p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.movie-card {
+  min-width: 0;
+}
+
+.poster-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 0.72;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--poster);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.36);
+}
+
+.poster-button::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    radial-gradient(circle at 35% 18%, rgba(255, 255, 255, 0.25), transparent 11%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.78));
+}
+
+.movie-card.selected .poster-button {
+  border-color: var(--purple-light);
+  box-shadow:
+    0 0 0 2px rgba(124, 58, 237, 0.9),
+    0 22px 42px rgba(0, 0, 0, 0.4);
+}
+
+.movie-card.missing .poster-button {
+  filter: saturate(0.45);
+  opacity: 0.76;
+}
+
+.match-check {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  background: rgba(8, 20, 15, 0.74);
+  color: var(--green);
+  font-size: 0.8rem;
+  font-weight: 850;
+  z-index: 2;
+}
+
+.movie-title {
+  margin: 12px 0 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-weight: 720;
+  line-height: 1.2;
+}
+
+.movie-year {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  margin-top: 9px;
+  padding: 0 11px;
+  border-radius: 6px;
+  font-size: 0.84rem;
+  font-weight: 720;
+}
+
+.pill.matched {
+  background: rgba(45, 173, 91, 0.2);
+  color: var(--green);
+}
+
+.pill.partial {
+  background: rgba(255, 196, 61, 0.18);
+  color: var(--gold);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.pagination button,
+.pagination span {
+  display: grid;
+  min-width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(9, 14, 21, 0.74);
+  color: var(--text);
+}
+
+.pagination button.active {
+  border-color: rgba(124, 58, 237, 0.7);
+  background: linear-gradient(135deg, #7c3aed, #5b36c9);
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.details-panel {
+  align-self: start;
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(68, 105, 130, 0.12), transparent 18rem),
+    rgba(12, 18, 26, 0.78);
+  box-shadow: var(--shadow);
+}
+
+.details-empty {
+  min-height: 280px;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.tv-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 30px;
+  padding: 32px 28px 28px 36px;
+}
+
+.tv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 25px 20px;
+}
+
+.show-card {
+  min-width: 0;
+}
+
+.show-poster-button,
+.show-detail-poster {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 0.78;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--poster, linear-gradient(145deg, #111827, #0a0f16));
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.36);
+}
+
+.show-poster-button::before,
+.show-detail-poster::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    radial-gradient(circle at 35% 18%, rgba(255, 255, 255, 0.16), transparent 12%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.74));
+}
+
+.show-card.selected .show-poster-button {
+  border-color: var(--purple-light);
+  box-shadow:
+    0 0 0 2px rgba(124, 58, 237, 0.9),
+    0 22px 42px rgba(0, 0, 0, 0.4);
+}
+
+.show-card.missing .show-poster-button {
+  filter: saturate(0.45);
+  opacity: 0.76;
+}
+
+.tv-presence-badge {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  padding: 6px 9px;
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  border-radius: 999px;
+  background: rgba(25, 18, 5, 0.9);
+  color: #fbbf24;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tv-presence-badge.duplicate {
+  border-color: rgba(167, 139, 250, 0.52);
+  background: rgba(31, 20, 56, 0.92);
+  color: #c4b5fd;
+}
+
+.tv-reconciliation-warning {
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 8px;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.tv-reconciliation-warning.duplicate {
+  border-color: rgba(167, 139, 250, 0.32);
+  background: rgba(124, 58, 237, 0.08);
+}
+
+.tv-reconciliation-warning strong {
+  color: #f8fafc;
+}
+
+.tv-reconciliation-warning p {
+  margin: 8px 0 0;
+  color: #bac3ce;
+  line-height: 1.45;
+}
+
+.tv-reconciliation-warning code {
+  color: #e2e8f0;
+  overflow-wrap: anywhere;
+}
+
+.show-details-panel {
+  align-self: start;
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(68, 105, 130, 0.12), transparent 18rem),
+    rgba(12, 18, 26, 0.78);
+  box-shadow: var(--shadow);
+}
+
+.tv-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.tv-detail-head h2 {
+  margin: 0;
+  font-size: 1.55rem;
+}
+
+.show-detail-poster {
+  aspect-ratio: 0.75;
+  margin-bottom: 24px;
+}
+
+.tv-show-full-detail {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.tv-show-full-detail[hidden] {
+  display: none;
+}
+
+.tv-detail-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.tv-detail-breadcrumb strong {
+  color: var(--text);
+}
+
+.tv-back-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--purple-light);
+  cursor: pointer;
+  font: inherit;
+}
+
+.tv-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(420px, 1fr) minmax(300px, 390px);
+  gap: 18px;
+  align-items: start;
+}
+
+.tv-detail-card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(86, 122, 147, 0.1), transparent 18rem),
+    rgba(11, 18, 26, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.tv-show-profile {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.tv-show-profile-card {
+  padding: 16px;
+}
+
+.tv-show-profile-main {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.tv-show-profile-poster,
+.tv-episode-thumb,
+.tv-inspector-art {
+  background: var(--poster, linear-gradient(145deg, #111827, #0a0f16));
+  background-position: center;
+  background-size: cover;
+}
+
+.tv-show-profile-poster {
+  aspect-ratio: 0.72;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+}
+
+.tv-show-profile-card h2,
+.tv-episode-table-head h2,
+.tv-episode-inspector h2 {
+  margin: 0;
+  color: var(--text);
+}
+
+.tv-show-profile-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.tv-show-profile-card p span {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--text);
+  font-size: 0.78rem;
+}
+
+.tv-show-profile-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tv-season-list {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.tv-season-list h3,
+.tv-show-summary-card h3,
+.tv-episode-inspector h3 {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.tv-season-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.tv-season-row.active {
+  background: rgba(109, 75, 214, 0.32);
+  color: #f8fafc;
+}
+
+.tv-season-row strong {
+  font-weight: 600;
+}
+
+.tv-show-summary-card {
+  padding: 18px;
+}
+
+.tv-show-summary-card p {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #94a3b8;
+}
+
+.status-dot.ok {
+  background: #22c55e;
+}
+
+.status-dot.warn {
+  background: #fbbf24;
+}
+
+.status-dot.bad {
+  background: #ef4444;
+}
+
+.status-dot.neutral {
+  background: #94a3b8;
+}
+
+.tv-episode-table-card {
+  padding: 18px;
+}
+
+.tv-episode-table-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.tv-episode-table-head span {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.tv-detail-mode-toggle {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+.tv-detail-mode-toggle button {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+}
+
+.tv-detail-mode-toggle button:first-child {
+  border-left: 0;
+}
+
+.tv-detail-mode-toggle button.active {
+  background: #6d4bd6;
+  color: #fff;
+}
+
+.tv-episode-table {
+  display: grid;
+}
+
+.tv-episode-row {
+  display: grid;
+  grid-template-columns: 38px minmax(210px, 1fr) 86px 120px 110px;
+  align-items: center;
+  gap: 12px;
+  min-height: 62px;
+  padding: 0 10px;
+  border: 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+}
+
+button.tv-episode-row {
+  cursor: pointer;
+}
+
+.tv-episode-row.active {
+  border: 1px solid rgba(139, 92, 246, 0.85);
+  border-radius: 7px;
+  background: rgba(124, 58, 237, 0.08);
+}
+
+.tv-episode-header {
+  min-height: 34px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.tv-episode-name {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.tv-episode-name strong {
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tv-episode-thumb {
+  width: 60px;
+  aspect-ratio: 1.55;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+
+.tv-episode-inspector {
+  padding: 18px;
+}
+
+.tv-inspector-art {
+  width: 100%;
+  aspect-ratio: 1.62;
+  margin-bottom: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+}
+
+.tv-episode-inspector > p {
+  margin: 0 0 4px;
+  color: var(--muted);
+}
+
+.tv-inspector-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 20px;
+}
+
+.tv-inspector-tags span,
+.tv-file-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.tv-episode-inspector section {
+  padding-top: 18px;
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.tv-episode-inspector section p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.tv-file-pill {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.tv-inspector-meta .detail-row {
+  grid-template-columns: minmax(90px, 0.75fr) minmax(0, 1fr);
+}
+

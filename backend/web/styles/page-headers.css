@@ -1,0 +1,78 @@
+.page-header {
+  --page-header-icon-size: 25px;
+  --page-header-title-size: 1.75rem;
+  --page-header-subtitle-size: 0.9rem;
+  display: flex;
+  min-height: 104px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0;
+  padding: 22px 28px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-header .page-heading-title {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0;
+  font-size: var(--page-header-title-size);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.page-header .page-heading-title svg {
+  width: var(--page-header-icon-size);
+  height: var(--page-header-icon-size);
+  flex: 0 0 var(--page-header-icon-size);
+  fill: none;
+  stroke: var(--retro-magenta);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.page-header .page-heading-title + p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: var(--page-header-subtitle-size);
+}
+
+.dashboard-view {
+  padding: 0 0 70px;
+}
+
+.dashboard-view > :not(.page-header) {
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.dashboard-view > .dashboard-metrics {
+  margin-top: 24px;
+}
+
+.programming-page-view {
+  padding: 0 0 44px;
+}
+
+.programming-page-view > :not(.page-header) {
+  margin-right: 28px;
+  margin-left: 28px;
+}
+
+@media (max-width: 760px) {
+  .page-header {
+    min-height: 96px;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px 18px 15px;
+  }
+
+  .dashboard-view > :not(.page-header),
+  .programming-page-view > :not(.page-header) {
+    margin-right: 18px;
+    margin-left: 18px;
+  }
+}
