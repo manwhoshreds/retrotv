@@ -84,7 +84,7 @@ func (s *Server) Handler() http.Handler {
 	// Static files
 	mux.Handle("/artwork/", http.StripPrefix("/artwork/", http.FileServer(http.Dir(s.artworkDir))))
 	mux.Handle("/logos/", http.StripPrefix("/logos/", http.FileServer(http.Dir(s.legacyLogoDir))))
-	mux.Handle("/", noCache(http.FileServer(http.Dir(s.staticDir))))
+	mux.Handle("/", noCache(http.FileServerFS(s.staticFS)))
 
 	return mux
 }

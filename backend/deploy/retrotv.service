@@ -1,0 +1,24 @@
+# systemd user unit for the RetroTV backend.
+#
+# Install on the server machine:
+#   mkdir -p ~/.config/systemd/user
+#   cp retrotv.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now retrotv
+#   sudo loginctl enable-linger $USER   # run at boot without logging in
+#
+# Expects ~/retrotv to contain retrotv-server, data/ and .env; the server
+# resolves data/ and .env relative to its working directory. The web UI is
+# embedded in the binary.
+
+[Unit]
+Description=RetroTV backend
+
+[Service]
+WorkingDirectory=%h/retrotv
+ExecStart=%h/retrotv/retrotv-server serve
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io/fs"
 	"net"
 	"net/http"
 	"os"
@@ -19,6 +20,7 @@ import (
 	"retrotv/internal/playback"
 	"retrotv/internal/scheduler"
 	"retrotv/internal/server"
+	"retrotv/web"
 
 	"github.com/joho/godotenv"
 )
@@ -130,8 +132,15 @@ func serve() error {
 	hlsVideoEncoder := stringEnv("RETROTV_HLS_VIDEO_ENCODER", "libx264")
 	hlsVideoPreset := stringEnv("RETROTV_HLS_VIDEO_PRESET", "")
 
+	// The UI is embedded in the binary; RETROTV_WEB_DIR serves it from disk
+	// instead, so edits show up on reload during development.
+	var staticFS fs.FS = web.Files
+	if webDir := os.Getenv("RETROTV_WEB_DIR"); webDir != "" {
+		staticFS = os.DirFS(webDir)
+	}
+
 	server, err := server.NewServer(server.Config{
-		StaticDir:         "web",
+		StaticFS:          staticFS,
 		StreamBaseURL:     streamBaseURL,
 		StreamDir:         streamDir,
 		StreamIdleTimeout: streamIdleTimeout,

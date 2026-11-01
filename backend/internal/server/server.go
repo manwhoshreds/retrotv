@@ -7,6 +7,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"io/fs"
 	"log"
 	"net/http"
 	"os"
@@ -32,7 +33,7 @@ const (
 )
 
 type Server struct {
-	staticDir        string
+	staticFS         fs.FS
 	store            *config.Store
 	db               *database.Store
 	artworkDir       string
@@ -85,6 +86,8 @@ type scheduleGenerationStatus struct {
 }
 
 type Config struct {
+	// StaticFS serves the web UI. When nil, files are read from StaticDir on disk.
+	StaticFS          fs.FS
 	StaticDir         string
 	MediaDir          string
 	ConfigDir         string
@@ -98,9 +101,13 @@ type Config struct {
 }
 
 func NewServer(serverConfig Config) (*Server, error) {
-	staticDir := serverConfig.StaticDir
-	if staticDir == "" {
-		staticDir = "web"
+	staticFS := serverConfig.StaticFS
+	if staticFS == nil {
+		staticDir := serverConfig.StaticDir
+		if staticDir == "" {
+			staticDir = "web"
+		}
+		staticFS = os.DirFS(staticDir)
 	}
 
 	configDir := serverConfig.ConfigDir
@@ -138,7 +145,7 @@ func NewServer(serverConfig Config) (*Server, error) {
 	legacyLogoDir := filepath.Join(configDir, "logos")
 
 	server := &Server{
-		staticDir:     staticDir,
+		staticFS:      staticFS,
 		store:         store,
 		db:            db,
 		artworkDir:    artworkDir,
