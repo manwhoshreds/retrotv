@@ -1,6 +1,6 @@
 # systemd user unit for the RetroTV backend.
 #
-# Install on the server machine:
+# scripts/deploy-backend.sh installs this on the server machine. By hand:
 #   mkdir -p ~/.config/systemd/user
 #   cp retrotv.service ~/.config/systemd/user/
 #   systemctl --user daemon-reload
